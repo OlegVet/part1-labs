@@ -6,10 +6,6 @@ import org.junit.*;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.luxoft.springioc.lab1.model.Country;
-import com.luxoft.springioc.lab1.model.Person;
-import com.luxoft.springioc.lab1.model.UsualPerson;
-
 public class HelloWorldTest {
 
 	protected static final String APPLICATION_CONTEXT_XML_FILE_NAME = "classpath:application-context.xml";
@@ -29,8 +25,8 @@ public class HelloWorldTest {
 		UsualPerson person = (UsualPerson) context.getBean("person", Person.class);
 
 		System.out.println("-->" + person.getCountry().getA());
-//		assertEquals(expectedPerson, person);
-//		System.out.println(person);
+		assertEquals(expectedPerson, person);
+		System.out.println(person);
 	}
 
 	private UsualPerson getExpectedPerson() {
