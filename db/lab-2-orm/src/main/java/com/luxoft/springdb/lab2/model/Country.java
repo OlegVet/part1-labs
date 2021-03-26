@@ -1,11 +1,22 @@
 package com.luxoft.springdb.lab2.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 
+@Entity
+@Table(name = "COUNTRY")
 public class Country implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8523759908682293799L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	private String name;
@@ -26,6 +37,7 @@ public class Country implements Serializable {
 		this.codeName = codeName;
 	}
 
+	@Column(nullable = false)
 	public int getId() {
 		return id;
 	}
@@ -34,6 +46,7 @@ public class Country implements Serializable {
 		this.id = id;
 	}
 
+	@Column(name = "NAME")
 	public String getName() {
 		return name;
 	}
@@ -42,6 +55,7 @@ public class Country implements Serializable {
 		this.name = name;
 	}
 
+	@Column(name="CODE_NAME")
 	public String getCodeName() {
 		return codeName;
 	}
@@ -50,27 +64,18 @@ public class Country implements Serializable {
 		this.codeName = codeName;
 	}
 
+	@Override
 	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 		Country country = (Country) o;
-
-		if (codeName != null ? !codeName.equals(country.codeName) : country.codeName != null)
-			return false;
-		if (name != null ? !name.equals(country.name) : country.name != null)
-			return false;
-
-		return true;
+		return Objects.equals(name, country.name) &&
+				Objects.equals(codeName, country.codeName);
 	}
 
+	@Override
 	public int hashCode() {
-		int result = 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (codeName != null ? codeName.hashCode() : 0);
-		return result;
+		return Objects.hash(name, codeName);
 	}
 
 	@Override
